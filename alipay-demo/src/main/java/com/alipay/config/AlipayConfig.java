@@ -1,4 +1,4 @@
-package com.alipay.config;
+package src.main.java.com.alipay.config;
 
 import java.io.FileWriter;
 import java.io.IOException;
