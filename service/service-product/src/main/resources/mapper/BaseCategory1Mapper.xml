@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.gmall.product.mapper.BaseCategory1Mapper">
+
+    <resultMap id="BaseResultMap" type="com.atguigu.gmall.product.entity.BaseCategory1">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name
+    </sql>
+
+    <resultMap id="CATEGORY_TREE_RESULT_MAP" type="com.atguigu.gmall.web.vo.CategoryVo">
+        <id column="c1Id" property="categoryId" />
+        <result column="c1Name" property="categoryName" />
+        <collection property="categoryChild" ofType="com.atguigu.gmall.web.vo.CategoryVo">
+            <id column="c2Id" property="categoryId" />
+            <result column="c2Name" property="categoryName"/>
+            <collection property="categoryChild" ofType="com.atguigu.gmall.web.vo.CategoryVo">
+                <id column="c3Id" property="categoryId"/>
+                <result column="c3Name" property="categoryName" />
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="findAllCategory" resultMap="CATEGORY_TREE_RESULT_MAP">
+        select c1.id c1id ,
+               c1.`name` c1Name ,
+               c2.id c2Id , c2.name c2Name ,
+               c3.id c3Id , c3.name  c3Name
+        from base_category1 c1
+                 LEFT JOIN base_category2 c2 on c2.category1_id = c1.id
+                 LEFT JOIN base_category3 c3 on c3.category2_id = c2.id
+    </select>
+
+    <select id="findByCategoryBySkuId" resultType="com.atguigu.gmall.web.vo.CategoryView">
+        select bc3.id category3Id , bc3.`name` category3Name ,
+               bc2.id category2Id , bc2.`name` category2Name ,
+               bc1.id category1Id , bc1.`name` category1Name
+        from
+            base_category3 bc3
+                LEFT JOIN base_category2 bc2 on bc2.id = bc3.category2_id
+                LEFT JOIN base_category1 bc1 on bc1.id = bc2.category1_id
+        where bc3.id = (select si.category3_id from sku_info si where si.id = #{skuId})
+
+    </select>
+
+</mapper>

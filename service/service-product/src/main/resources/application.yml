@@ -1,0 +1,42 @@
+# 服务端口号
+server:
+  port: 10100
+
+# 数据库的连接地址
+spring:
+  # 加载sharding这个配置文件
+  profiles:
+    include: sharding
+
+  # 配合redis的连接信息
+  redis:
+    host: 192.168.200.130
+    port: 6379
+    password: root
+
+# mybatis plus的相关信息
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 日志输出的实现类
+  type-aliases-package: com.atguigu.gmall.product.entity
+  mapper-locations: classpath:/mapper/*.xml
+
+# 定义minio的连接信息
+app:
+  minio:
+    endpoint: http://192.168.200.130:9000
+    accessKey: admin
+    secretKey: admin1234
+    bucket: gmall
+  # 线程池参数配置
+  threadpool:
+    corePoolSize: 4
+    maximumPoolSize: 10
+    keepAliveTime: 2
+    workQueueSize: 60
+
+# feign和sentinel的集合
+feign:
+  sentinel:
+    enabled: true
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.gmall.product.mapper.SkuSaleAttrValueMapper">
+
+    <resultMap id="BaseResultMap" type="com.atguigu.gmall.product.entity.SkuSaleAttrValue">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="skuId" column="sku_id" jdbcType="BIGINT"/>
+            <result property="spuId" column="spu_id" jdbcType="INTEGER"/>
+            <result property="saleAttrValueId" column="sale_attr_value_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,sku_id,spu_id,
+        sale_attr_value_id
+    </sql>
+
+    <select id="findBrotherSkuSaleAttrValueConcatBySkuId" resultType="com.atguigu.gmall.web.vo.AttrValueConcatVo">
+        SELECT ssav.sku_id ,
+               GROUP_CONCAT(DISTINCT ssav.sale_attr_value_id ORDER BY ssav.sale_attr_value_id ASC
+                SEPARATOR '|'
+            )  attrValueConcat
+                    from sku_sale_attr_value ssav
+                    where ssav.spu_id = (select si.spu_id from sku_info si where si.id = #{skuId} )
+                    GROUP BY ssav.sku_id
+    </select>
+</mapper>

@@ -1,0 +1,11 @@
+# 服务名称
+spring:
+  application:
+    name: service-product
+  cloud:
+    nacos:
+      server-addr: 192.168.200.130:8848   # nacos的配置中心和注册中心的地址
+      config:
+        shared-configs:
+          - commons.yml
+          - feign.yml

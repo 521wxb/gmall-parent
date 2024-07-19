@@ -1,0 +1,47 @@
+# 服务端口号
+server:
+  port: 10900
+
+# 数据库的连接地址
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.200.130:3306/gmall_activity?useSSL=false&characterEncoding=UTF8
+    username: root
+    password: root
+
+  # 配置Redis的相关信息
+  redis:
+    host: 192.168.200.130
+    port: 6379
+    password: root
+  # 加入rabbitmq的相关配置
+  rabbitmq:
+    host: 192.168.200.130
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual # 手动应答
+        prefetch: 1 # 消费者限流
+
+# 定义线程池的相关配置
+app:
+  # 线程池参数配置
+  threadpool:
+    corePoolSize: 4
+    maximumPoolSize: 10
+    keepAliveTime: 2
+    workQueueSize: 60
+
+# mybatis plus的相关信息
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 日志输出的实现类
+  type-aliases-package: com.atguigu.gmall.seckill.entity
+  mapper-locations: classpath:/mapper/*.xml

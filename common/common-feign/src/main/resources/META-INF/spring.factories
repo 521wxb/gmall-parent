@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.atguigu.gmall.feign.item.fallback.SkuDetailFeignClientFallback,\
+  com.atguigu.gmall.feign.product.fallback.CategoryFeignClientFallBack,\
+  com.atguigu.gmall.feign.search.fallbck.GoodsFeignClientFallback,\
+  com.atguigu.gmall.feign.product.fallback.SkuDetailFeignClientFallback,\
+  com.atguigu.gmall.feign.cart.fallback.CartFeignClientFallback,\
+  com.atguigu.gmall.feign.order.fallback.OrderFeignClientFallback,\
+  com.atguigu.gmall.feign.user.fallback.UserAddressFeignClientFallback,\
+  com.atguigu.gmall.feign.seckill.fallback.SeckillFeignClientFallback

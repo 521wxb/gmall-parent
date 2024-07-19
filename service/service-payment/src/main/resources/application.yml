@@ -1,0 +1,31 @@
+# 服务端口号
+server:
+  port: 10800
+
+# 数据库的连接地址
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  # 加入rabbitmq的相关配置
+  rabbitmq:
+    host: 192.168.200.130
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
+
+# 配置支付宝开放平台的相关信息
+alipay:
+  serverUrl: https://openapi.alipaydev.com/gateway.do
+  appId: 2021000122609658
+  privateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCKBT3jUwcV7Q7jSIaAROj9C6ebTKjQqLiBuqh7yZq9XPVtsIyMcY92Kbe5NZIzKUaWgkO0Aovyf4QMvdg2llkXjXJn/s+yASOyiP7eqDnOjKpErb7T2ip0KC9YerrZ1GLtYFoipJzGn5IN3F1I1EYbnxNBaAo4YnFj19bV6teDIiPZ8KxuOz19z9KBx1q0Kkd/4aHxIYcXob8JPEkR/f8/q1x1JFbU7/NvNSHVXkjBO6sfwybqaVTjBIKJNm/LDqjIdPvJcB+2r4LEcoR6zsA8Y3nFfQTvlumax9DVIGl/q1JDQ0Gg4J+e4VHn9V0WekqTnihrYqB0aPl4GckLOfQfAgMBAAECggEAUKNzXyeZUjQoqJ4tBzA7t+xhRpjpYM/SzOjTm09UuyJeunGWDFAk83K4RtuHyaBp/3GoQLnkLhBWhGM+udXpw5r+psf3bRbBVoQ39Lrw2z7QFEQ24+vpNehskRNTrAUsr2fGAcuPVXTRjoubbPuo4mZ0h5hTsFHD0gO/H0iQFaq2iLAJ3bj8yyFMXNI1x0A7tUsTOOm7l3EyU5OToKfuGncQ1VeHTF5RNtauBTaa/6C45kCVYWXXxgmn7IjJN3rJaCYEsNttt8cnOFllZx6CThJXP2smG6+nq7YdsgMyNxP4/b23y7Wni+L+HJRhFy0OhUT8Kr8/7K6TUNhSUEx0kQKBgQDI7kTocOIfbmZketcxZfsCZNUs66tjNGakkd42hvwIRvRHEMxIZBA1/rVjq2/AONa+7cDd0l24PEaknhcVhOvrwMpfhG7iwHOCmiOt0qbJLfdUoiyPP72uEA9t+pfREF+wvx5Kl8FMtuoB7PMIXXYO/HFFbYHZu1i3jmzx1xzq8wKBgQCv2Q3GpvYtXrR8+c2olIvPArGUfCDdqlDfu53w0XPRs7/0IkyNcgbJuGK4e0fXUSGQ8NbKQC3IMK/yfwIOmiLklyJ0bfmIP928v7EYTuM9G0FA31EeOxbJWjIt0iTC40sKx5YQvWAuZ5TUkCqbyFbl9NVmW0GOQUN/YtaGkYXFJQKBgQC6nOisxOKOdJdubNRd0aw9ve5rCPolae6Gm98430dGXLfVJNnFxgF0VHqc9gUVDvULYH9GxXE7gefOTfF8j/YY//Y0nifqOvlM6+GFN+alZCaYmQIvjPCar9nUt++2QLHO0sHMX4Msv5k4bpwNQdg69OQyqhD2alRsLkAqoDIAVwKBgBG4QZcfA/eWb4GYeozeSyhVESfxSi6MFxI0ibnWoWEkR9eGDUjDkMOK/QeyBI9B8av1WO+QgAyIO3KoMcDe710xjZtF6bs9FE8M0f+tE2D4+h5bYoU1Vxp7KEtNvb6VwN4ZNpoBO0vxzCGPVXvVOEx723UxBO4czXxsrUlqKJyxAoGANBMquDq96RA2Br+rrmKyLYhqFM83DX68gom4u/1P8KHsia/ghC02riFXvmnXS2zremsRuq8WCRg8jmccBaqA6mKJdEcsmC32RE12kh5oHe9vsW4zNeqHJb/LeLrhnb9txBTCBNc/eFzFzGZ8Nkp4rGLdczOBH2hScu/iJr/0x08=
+  format: json
+  charSet: utf-8
+  aliPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk41ooyX7utKM9B7jNcc4EzmyVU0Qfs18KFVFwyhl7YQMw/PB2YVQreVSvvb1rS/2YVxcjLK/9ehD//79b8aoxhFlEGqA7fGu0C2UR6pl+PhmRLcHeyN+DOG87Fhqb1t4JXmXQc1LXUfelJoh+r5XnMPWDAlY5JJtH3GZIU+AoBt9PuEtfhh03LL6WtnJMwOnqH94T8qHymLDftEGOWme1iAlenB692cUId20BmLJal621EAN+xpmkeJZEpx1wQ2fGhyTo7pm4v8LVLuqzOXkraffITvfbPl5IU0kjjs/QECwItAI0IBbNsDutezw/a0JobijjoF28uo4gtwmncBoQwIDAQAB
+  signType: RSA2
+  returnUrl: http://gmall.com/pay/success.html
+  notifyUrl: http://xiangmu.natapp1.cc/api/payment/alipay/listenpayed
+
+

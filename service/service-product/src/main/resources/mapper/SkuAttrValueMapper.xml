@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.gmall.product.mapper.SkuAttrValueMapper">
+
+    <resultMap id="BaseResultMap" type="com.atguigu.gmall.product.entity.SkuAttrValue">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="attrId" column="attr_id" jdbcType="BIGINT"/>
+            <result property="valueId" column="value_id" jdbcType="BIGINT"/>
+            <result property="skuId" column="sku_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,attr_id,value_id,
+        sku_id
+    </sql>
+
+    <select id="findSkuAttrAndValueBySkuId" resultType="com.atguigu.gmall.search.entity.SearchAttr">
+        select sav.attr_id attrId , bai.attr_name attrName , bav.value_name attrValue  from sku_attr_value sav
+                LEFT JOIN base_attr_info bai on bai.id = sav.attr_id
+                LEFT JOIN base_attr_value bav on bav.id = sav.value_id
+        where sav.sku_id = #{skuId}
+    </select>
+
+</mapper>

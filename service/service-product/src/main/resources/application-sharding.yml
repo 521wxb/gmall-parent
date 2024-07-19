@@ -1,0 +1,37 @@
+# 配置数据源
+spring:
+  shardingsphere:
+    datasource:
+      names: master,slave01,slave02
+      master:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://192.168.200.130:3306/gmall_product?useSSL=false&characterEncoding=UTF8
+        username: root
+        password: root
+      slave01:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://192.168.200.130:3307/gmall_product?useSSL=false&characterEncoding=UTF8
+        username: root
+        password: root
+      slave02:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://192.168.200.130:3308/gmall_product?useSSL=false&characterEncoding=UTF8
+        username: root
+        password: root
+    rules:
+      readwrite-splitting:
+        data-sources:
+          product-rw-rules:
+            type: Static
+            props:
+              write-data-source-name: master
+              read-data-source-names: slave01,slave02
+            loadBalancerName: product_lb
+        load-balancers:
+          product_lb:
+            type: ROUND_ROBIN
+    props:
+      sql-show: true

@@ -1,0 +1,12 @@
+# 服务端口号
+server:
+  port: 10600
+
+# 配置redis
+spring:
+  redis:
+    host: 192.168.200.130
+    port: 6379
+    password: root
+  main:
+    allow-bean-definition-overriding: true

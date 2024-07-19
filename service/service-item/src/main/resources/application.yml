@@ -1,0 +1,26 @@
+# 服务端口号
+server:
+  port: 10300
+
+# feign和sentinel整合
+feign:
+  sentinel:
+    enabled: true
+
+# 配置redis的连接信息
+spring:
+  redis:
+    host: 192.168.200.130
+    port: 6379
+    password: root
+  # 解决bean定义的冲突问题
+  main:
+    allow-bean-definition-overriding: true
+
+# 线程池参数配置
+app:
+  threadpool:
+    corePoolSize: 4
+    maximumPoolSize: 10
+    keepAliveTime: 2
+    workQueueSize: 60

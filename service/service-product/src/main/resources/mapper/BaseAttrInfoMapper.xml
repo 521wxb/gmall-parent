@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.gmall.product.mapper.BaseAttrInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.atguigu.gmall.product.entity.BaseAttrInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="attrName" column="attr_name" jdbcType="VARCHAR"/>
+            <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+            <result property="categoryLevel" column="category_level" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,attr_name,category_id,
+        category_level
+    </sql>
+
+    <resultMap id="attrValueListMP" type="com.atguigu.gmall.product.entity.BaseAttrInfo" autoMapping="true">
+        <id property="id" column="id"></id>
+<!--        <result property="attrName" column="attr_name" />-->
+<!--        <result property="categoryId" column="category_id" />-->
+<!--        <result property="categoryLevel" column="category_level" />-->
+        <collection property="attrValueList" ofType="com.atguigu.gmall.product.entity.BaseAttrValue" autoMapping="true">
+            <id column="bavId" property="id"></id>
+<!--            <result column="value_name" property="valueName" ></result>-->
+<!--            <result column="attr_id" property="attrId" />-->
+        </collection>
+    </resultMap>
+
+    <select id="findByCategoryId" resultMap="attrValueListMP">
+        select avi.id ,avi.attr_name , avi.category_id ,
+               avi.category_level , bav.id bavId , bav.value_name , bav.attr_id
+        from base_attr_info avi
+        LEFT JOIN base_attr_value bav on bav.attr_id = avi.id
+        <where>
+            <if test="c1Id != 0">
+                (avi.category_id = #{c1Id} and avi.category_level = 1)
+            </if>
+            <if test="c2Id != 0">
+                or (avi.category_id = #{c2Id} and avi.category_level = 2 )
+            </if>
+            <if test="c3Id != 0">
+                or (avi.category_id = #{c3Id} and avi.category_level = 3 )
+            </if>
+        </where>
+
+    </select>
+
+</mapper>

@@ -1,0 +1,45 @@
+# 服务端口号
+server:
+  port: 10700
+
+# 数据库的连接地址
+spring:
+  profiles:
+    include: shardingsphere
+  main:
+    allow-bean-definition-overriding: true
+
+  # 加入redis的相关配置
+  redis:
+    host: 192.168.200.130
+    port: 6379
+    password: root
+
+  # 加入rabbitmq的相关配置
+  rabbitmq:
+    host: 192.168.200.130
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual # 手动应答
+        prefetch: 1 # 消费者限流
+
+#  datasource:
+#    type: com.zaxxer.hikari.HikariDataSource
+#    url: jdbc:mysql://192.168.200.130:3306/gmall_order?useSSL=false&characterEncoding=UTF8
+#    driver-class-name: com.mysql.jdbc.Driver
+#    username: root
+#    password: root
+
+# mybatis plus的相关信息
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 日志输出的实现类
+  type-aliases-package: com.atguigu.gmall.order.entity
+  mapper-locations: classpath:/mapper/*.xml
+
